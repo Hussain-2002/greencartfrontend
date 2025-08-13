@@ -19,7 +19,8 @@ export const AuthProvider = ({ children }) => {
 
   const fetchUser = async () => {
     try {
-      const response = await api.get('/auth/me');
+      // Fixed: Added /api prefix
+      const response = await api.get('/api/auth/me');
       setUser(response.data);
     } catch (error) {
       localStorage.removeItem('token');
@@ -30,7 +31,8 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (username, password) => {
     try {
-      const response = await api.post('/auth/login', { username, password });
+      // Fixed: Added /api prefix
+      const response = await api.post('/api/auth/login', { username, password });
       const { token, user } = response.data;
       
       if (!token || !user) {

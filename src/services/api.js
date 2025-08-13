@@ -1,16 +1,12 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: process.env.REACT_APP_API_URL || 'http://localhost:5000/api',
+  baseURL: process.env.REACT_APP_API_URL || 'http://localhost:5000',
   headers: {
-    'Content-Type': 'application/json',
+    'Content-Type': 'application/json'
   },
-  withCredentials: true,
-  crossDomain: true
+  withCredentials: true
 });
-
-// Add CORS headers to all requests
-api.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
 
 // Intercept requests to add token
 api.interceptors.request.use((config) => {
