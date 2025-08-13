@@ -5,8 +5,12 @@ const api = axios.create({
   headers: {
     'Content-Type': 'application/json',
   },
-  withCredentials: true
+  withCredentials: true,
+  crossDomain: true
 });
+
+// Add CORS headers to all requests
+api.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
 
 // Intercept requests to add token
 api.interceptors.request.use((config) => {
