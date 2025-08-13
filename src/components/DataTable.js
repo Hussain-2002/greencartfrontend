@@ -1,5 +1,3 @@
-import React, { useState } from 'react';
-
 const DataTable = ({ data, columns, onEdit, onDelete }) => {
   return (
     <div className="data-table">
