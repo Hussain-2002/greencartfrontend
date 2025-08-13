@@ -15,11 +15,19 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError('');
+    
     try {
+      if (!username || !password) {
+        setError('Please enter both username and password');
+        return;
+      }
+      
       await login(username, password);
       navigate(from, { replace: true });
     } catch (err) {
-      setError('Invalid credentials');
+      setError(err.message || 'Login failed. Please try again.');
+      console.error('Login error:', err);
     }
   };
 

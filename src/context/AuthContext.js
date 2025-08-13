@@ -29,12 +29,23 @@ export const AuthProvider = ({ children }) => {
   };
 
   const login = async (username, password) => {
-    const response = await api.post('/auth/login', { username, password });
-    const { token, user } = response.data;
-    
-    localStorage.setItem('token', token);
-    api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-    setUser(user);
+    try {
+      const response = await api.post('/auth/login', { username, password });
+      const { token, user } = response.data;
+      
+      if (!token || !user) {
+        throw new Error('Invalid response from server');
+      }
+
+      localStorage.setItem('token', token);
+      api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+      setUser(user);
+      
+      return { success: true };
+    } catch (error) {
+      console.error('Login error:', error.response?.data || error.message);
+      throw new Error(error.response?.data?.error || 'Login failed. Please try again.');
+    }
   };
 
   const logout = () => {
