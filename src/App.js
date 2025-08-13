@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
 import PrivateRoute from './components/PrivateRoute';
 import Login from './pages/Login';
+import Registration from './pages/Registration';
 import Dashboard from './pages/Dashboard';
 import Simulation from './pages/Simulation';
 import DriversPage from './pages/DriversPage';
@@ -15,6 +16,7 @@ function App() {
       <Router>
         <Routes>
           <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Registration />} />
           <Route
             path="/"
             element={
